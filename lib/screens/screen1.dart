@@ -22,26 +22,10 @@ class _Screen_1State extends State<Screen_1> {
   @override
   Widget build(BuildContext context) {
     return userState == appState.none? login(): validateEmail();
-    // return Scaffold(
-    //   backgroundColor: Theme.of(context).backgroundColor,
-    //   drawer: NavDrawer(),
-    //   appBar: AppBar(
-    //     title: Text("menu"),
-    //   ),
-    //   body: Column(
-    //     children: [
-    //       if (userState == appState.none) Text("Login"),
-    //       if (userState == appState.loggedin) Text("Validate"),
-    //
-    //       Text("Screen One", style: TextStyle(fontSize: 30),),
-    //       ElevatedButton(
-    //           onPressed: () {
-    //             Navigator.pushNamed(context, Screen_2.id);
-    //           },
-    //           child: Text("Press Me"))
-    //     ],
-    //   ),
-    //
-    // );
+
+  }
+  void changeState(appState newState){
+
+
   }
 }
