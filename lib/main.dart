@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '/screens/screen1.dart';
 import '/screens/screen2.dart';
 import '/screens/screen3.dart';
+// import '/widgets/navigation_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        backgroundColor: Colors.lightBlue,
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
