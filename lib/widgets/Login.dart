@@ -1,13 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
-
-  @override
-  State<login> createState() => _loginState();
-}
-
-class _loginState extends State<login> {
+import 'package:flutter_navigation/screens/screen1.dart';
+class Login extends StatelessWidget {
+  final Function callback;
+  const Login({Key? key, required this.callback()}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +17,7 @@ class _loginState extends State<login> {
         children: [
           ElevatedButton(
               onPressed: () {
+                callback(appState.loggedin);
               },
               child: Text("Login"))
         ],

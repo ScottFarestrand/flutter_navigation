@@ -8,6 +8,7 @@ enum appState {
   loggedin,
   validated
 }
+
 class Screen_1 extends StatefulWidget {
   static const id = "Screen_One";
 
@@ -19,13 +20,28 @@ class Screen_1 extends StatefulWidget {
 
 class _Screen_1State extends State<Screen_1> {
   var userState = appState.none;
+  void setStateLoggedIn(){
+    setState((){
+      userState = appState.loggedin;
+    });
+  }
+  void setStateValidated(){
+    setState((){
+      userState = appState.validated;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return userState == appState.none? login(): validateEmail();
+    if (userState == appState.none) {
+      return Login(callback: setStateLoggedIn);
+    }
+    if (userState == appState.loggedin) {
+      return validateEmail(callback: setStateValidated,);
+    }
+    // if (userState == appState.validated) {}
+    return validateEmail(callback: setStateValidated,);
 
   }
-  void changeState(appState newState){
 
 
-  }
 }

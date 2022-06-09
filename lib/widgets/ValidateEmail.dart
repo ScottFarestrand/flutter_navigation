@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import '../screens/screen2.dart';
+import '../screens/screen2.dart';
 class validateEmail extends StatefulWidget {
-  const validateEmail({Key? key}) : super(key: key);
+  final Function callback;
+  const validateEmail({Key? key, required this.callback()}) : super(key: key);
 
   @override
   State<validateEmail> createState() => _validateEmailState();
@@ -23,7 +24,7 @@ class _validateEmailState extends State<validateEmail> {
           Text("Validate", style: TextStyle(fontSize: 30),),
           ElevatedButton(
               onPressed: () {
-                // Navigator.pushNamed(context, Screen_2.id);
+                Navigator.pushNamed(context, Screen_2.id);
               },
               child: Text("Verify Email"))
         ],
