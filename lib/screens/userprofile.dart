@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-class Screen_3 extends StatelessWidget {
-  static const id = "Screen_Three";
-  const Screen_3({Key? key}) : super(key: key);
+class UserProfile extends StatelessWidget {
+  static const id = "UserProfile";
+  const UserProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +14,15 @@ class Screen_3 extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Text("Press Three"),
+          ),
+          ElevatedButton(onPressed: (){
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Hi! i am snackbar'),
+                )
+            );
+          },
+              child: Text("Show Snackbar")
           ),
         ],
       ),
