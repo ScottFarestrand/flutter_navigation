@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/screens/login.dart';
-class Register extends StatelessWidget {
+class Registerx extends StatelessWidget {
   final Function callback;
-  const Register({Key? key, required this.callback()}) : super(key: key);
+  const Registerx({Key? key, required this.callback()}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

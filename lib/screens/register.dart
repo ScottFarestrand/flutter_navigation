@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './userprofile.dart';
+import './profile.dart';
 class Register extends StatelessWidget {
   static const id = "Register";
   const Register({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class Register extends StatelessWidget {
                       content: Text('You have been validated'),
                     )
                 );
-                Navigator.pushNamed(context, UserProfile.id);
+                Navigator.pushNamed(context, Profile.id);
               },
               child: Text("Press Two"),
           ),

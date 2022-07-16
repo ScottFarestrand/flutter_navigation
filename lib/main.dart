@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import '/screens/login.dart';
 import '/screens/register.dart';
-import '/screens/userprofile.dart';
+import '/screens/profile.dart';
+import './screens/reminders.dart';
+import './screens/people.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import '/widgets/navigation_drawer.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseAuth auth = FirebaseAuth.instance;
   runApp(const MyApp());
 }
 
@@ -25,7 +32,8 @@ class MyApp extends StatelessWidget {
       routes: {
         Login.id: (context) => Login(),
         Register.id: (context) => Register(),
-        UserProfile.id: (context) => UserProfile(),
+        Profile.id: (context) => Profile(),
+        People.id: (context) => People(),
       },
     );
   }
