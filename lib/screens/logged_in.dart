@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/widgets/people_widget.dart';
 import '../widgets/profile_widget.dart';
-import '../widgets/profile_widget.dart';
+// import '../widgets/profile_widget.dart';
 import '../widgets/reminders_widget.dart';
 // import '../screens/people.dart';
 // import '../screens/profile.dart';
 // import '../screens/reminders.dart';
-import '../screens/person.dart';
+// import '../screens/person.dart';
 
 class Logged_In extends StatefulWidget {
   const Logged_In({Key? key}) : super(key: key);
+  static const id = "LoggedIn";
   @override
   State<Logged_In> createState() => _Logged_InState();
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
+// import 'dart:async';
 import './register.dart';
-import './profile.dart';
+// import './profile.dart';
+import './logged_in.dart';
 // import './register.dart';
 // import '../widgets/navigation_drawer.dart';
-import '../widgets/Login.dart';
-import '../widgets/ValidateEmail.dart';
-import '../widgets/register.dart';
+// import '../widgets/Login.dart';
+// import '../widgets/ValidateEmail.dart';
+// import '../widgets/register.dart';
 
 
 class Login extends StatefulWidget {
@@ -25,11 +26,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     print("Building Login");
-    FirebaseAuth auth = FirebaseAuth.instance;
+    // FirebaseAuth auth = FirebaseAuth.instance;
     final formKey = GlobalKey<FormState>();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-    final user =  FirebaseAuth.instance.currentUser!;
+    // final user =  FirebaseAuth.instance.currentUser!;
     emailController.text = "ScottFarestrand@gmail.com";
     passwordController.text = "Jlj#980507";
     return Scaffold(
@@ -83,7 +84,7 @@ class _LoginState extends State<Login> {
                       }
                     }
 
-                    Navigator.pushNamed(context, Profile.id);
+                    Navigator.pushNamed(context, Logged_In.id);
                   },
                   child: const Text('Login'),
                 ),
@@ -98,30 +99,30 @@ class _LoginState extends State<Login> {
         ));
 
   }
-  static Future<User?> signInUsingEmailPassword({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided.');
-      }
-    }
-
-    return user;
-  }
+  // static Future<User?> signInUsingEmailPassword({
+  //   required String email,
+  //   required String password,
+  //   required BuildContext context,
+  // }) async {
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   User? user;
+  //
+  //   try {
+  //     UserCredential userCredential = await auth.signInWithEmailAndPassword(
+  //       email: email,
+  //       password: password,
+  //     );
+  //     user = userCredential.user;
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       print('No user found for that email.');
+  //     } else if (e.code == 'wrong-password') {
+  //       print('Wrong password provided.');
+  //     }
+  //   }
+  //
+  //   return user;
+  // }
 
 
 }
