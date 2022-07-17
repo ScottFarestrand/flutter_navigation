@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigation/screens/login.dart';
+// import 'package:flutter_navigation/screens/login_screen.dart';
 class Registerx extends StatelessWidget {
   final Function callback;
   const Registerx({Key? key, required this.callback()}) : super(key: key);

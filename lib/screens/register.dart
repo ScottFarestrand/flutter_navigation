@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_navigation/screens/logged_in.dart';
+import 'package:flutter_navigation/screens/logged_in_screen.dart';
 // import './profile.dart';
-class Register extends StatelessWidget {
-  static const id = "Register";
-  const Register({Key? key}) : super(key: key);
+class Register_Screen extends StatelessWidget {
+  static const id = "Register_Screen";
+  const Register_Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Register extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 40,),
-          Text("SRegister", style: TextStyle(fontSize: 30),),
+          Text("Register_Screen", style: TextStyle(fontSize: 30),),
           ElevatedButton(
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -20,7 +20,7 @@ class Register extends StatelessWidget {
                       content: Text('You have been validated'),
                     )
                 );
-                Navigator.pushNamed(context, Logged_In.id);
+                Navigator.pushNamed(context, Logged_In_Screen.id);
               },
               child: Text("Press Two"),
           ),

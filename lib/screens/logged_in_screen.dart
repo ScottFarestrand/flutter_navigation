@@ -8,14 +8,14 @@ import '../widgets/reminders_widget.dart';
 // import '../screens/reminders.dart';
 // import '../screens/person.dart';
 
-class Logged_In extends StatefulWidget {
-  const Logged_In({Key? key}) : super(key: key);
+class Logged_In_Screen extends StatefulWidget {
+  const Logged_In_Screen({Key? key}) : super(key: key);
   static const id = "LoggedIn";
   @override
-  State<Logged_In> createState() => _Logged_InState();
+  State<Logged_In_Screen> createState() => _Logged_In_ScreenState();
 }
 
-class _Logged_InState extends State<Logged_In> {
+class _Logged_In_ScreenState extends State<Logged_In_Screen> {
   int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {

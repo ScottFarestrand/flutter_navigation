@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 // import 'dart:async';
 import './register.dart';
 // import './profile.dart';
-import './logged_in.dart';
+import './logged_in_screen.dart';
 // import './register.dart';
 // import '../widgets/navigation_drawer.dart';
 // import '../widgets/Login.dart';
@@ -11,17 +11,17 @@ import './logged_in.dart';
 // import '../widgets/register.dart';
 
 
-class Login extends StatefulWidget {
-  static const id = "Login";
+class Login_Screen extends StatefulWidget {
+  static const id = "Login_Screen";
 
 
-  const Login({Key? key}) : super(key: key);
+  const Login_Screen({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Login_Screen> createState() => _Login_ScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _Login_ScreenState extends State<Login_Screen> {
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +84,12 @@ class _LoginState extends State<Login> {
                       }
                     }
 
-                    Navigator.pushNamed(context, Logged_In.id);
+                    Navigator.pushNamed(context, Logged_In_Screen.id);
                   },
                   child: const Text('Login'),
                 ),
                 ElevatedButton(onPressed: () {
-                  Navigator.pushNamed(context, Register.id);
+                  Navigator.pushNamed(context, Register_Screen.id);
 
                 }, child: Text("Register")),
               ],
