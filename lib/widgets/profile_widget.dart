@@ -25,7 +25,6 @@ class _Profile_WidgetState extends State<Profile_Widget> {
   final cellPhoneNumberController = TextEditingController();
   final dateController = TextEditingController();
   final birthDateController = TextEditingController();
-  // MaskTextInputFormatter formatter();
   var maskFormatter = new MaskTextInputFormatter(mask: '###.###.####', filter: { "#": RegExp(r'[0-9]') });
   DateTime birthDate = DateTime.now();
   String firstName = "";
@@ -34,10 +33,8 @@ class _Profile_WidgetState extends State<Profile_Widget> {
   bool textReminders = false;
   bool emailReminders = false;
   bool cellPhoneValidated = false;
-  // bool _saved = true;
   String origCellPhone = "";
   bool _cellValidated = false;
-  // bool _alerted = false;
   final UserProfile userProfile = UserProfile(
     firstName: "",
     lastName: "",
@@ -55,7 +52,6 @@ class _Profile_WidgetState extends State<Profile_Widget> {
       doc(FirebaseAuth.instance.currentUser!.uid).
       get().then((snapshot) =>
       {
-
         tempDate = snapshot.data().toString().contains('birthdate') ?
             snapshot['birthdate'].toString() : DateTime.now().toString(),
 
