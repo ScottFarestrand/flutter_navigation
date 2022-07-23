@@ -55,30 +55,34 @@ class _Profile_WidgetState extends State<Profile_Widget> {
       doc(FirebaseAuth.instance.currentUser!.uid).
       get().then((snapshot) =>
       {
-        print("Got The Record"),
-        print(FirebaseAuth.instance.currentUser!.uid),
-        print(snapshot.data()),
-        print(snapshot['birthdate'].toString()),
-        tempDate = snapshot['birthdate'].toString(),
+
+        tempDate = snapshot.data().toString().contains('birthdate') ?
+            snapshot['birthdate'].toString() : DateTime.now().toString(),
 
         _seconds = int.parse(tempDate.substring(18, 28)),
         _nanoseconds =
             int.parse(tempDate.substring(42, tempDate.lastIndexOf(')'))),
         birthDate = Timestamp(_seconds, _nanoseconds).toDate(),
-        print("first"),
-        firstNameController.text = snapshot['firstname'],
-        print("last"),
-        lastNameController.text = snapshot['lastname'],
-        print("email"),
-        emailReminders = snapshot["sendemailreminders"],
-        print("text"),
-        textReminders = snapshot["sendtextreminders"],
-        print("Cell"),
-        cellPhoneNumberController.text = snapshot["cellphone"],
-        print("validate"),
-        cellPhoneValidated = snapshot["cellphonevalidated"],
-        print("done"),
-        print(birthDate),
+
+        firstNameController.text = snapshot.data().toString().contains('firstname') ?
+          snapshot['firstname'] : "",
+
+        lastNameController.text = snapshot.data().toString().contains('lastname') ?
+        snapshot['lastname'] : "",
+
+          emailReminders = snapshot.data().toString().contains("sendemailreminders") ?
+          snapshot["sendemailreminders"] : false,
+
+
+        textReminders = snapshot.data().toString().contains('sendtextreminders') ?
+          snapshot["sendtextreminders"] : false,
+
+        cellPhoneNumberController.text = snapshot.data().toString().contains('cellphone') ?
+          snapshot["cellphone"] : '',
+
+        cellPhoneValidated = snapshot.data().toString().contains('cellphonevalidated') ?
+          snapshot["cellphonevalidated"] : false,
+
         userProfile.updateUserProfile(
           snapshot['firstname'],
           snapshot['lastname'],
