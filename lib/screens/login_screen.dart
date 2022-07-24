@@ -34,6 +34,9 @@ class _Login_ScreenState extends State<Login_Screen> {
     emailController.text = "ScottFarestrand@gmail.com";
     passwordController.text = "Jlj#980507";
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Random Reminder - Login"),
+        ),
         body: Form(
           key: formKey,
           child: Padding(

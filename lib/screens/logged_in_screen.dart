@@ -17,8 +17,11 @@ class Logged_In_Screen extends StatefulWidget {
 
 class _Logged_In_ScreenState extends State<Logged_In_Screen> {
   int _currentIndex = 1;
+  bool _actionVisible = false;
   @override
   Widget build(BuildContext context) {
+    print("Building");
+
     print("Building");
     print(_currentIndex);
     final widgets = [
@@ -27,10 +30,35 @@ class _Logged_In_ScreenState extends State<Logged_In_Screen> {
       Reminders_Widget(),
     ];
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Visibility(
+            visible: _actionVisible,
+            child: IconButton(
+              icon: Icon(Icons.add),
+              tooltip: "Add new person",
+              onPressed: (){
+
+              },
+            ),
+          ),
+        ],
+
+        title: Text("Random Reminder"),
+
+      ),
       body: widgets[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => {
-          setState(() => _currentIndex = index),
+          setState(() {
+            _currentIndex = index;
+            if (_currentIndex == 1 ) {
+              _actionVisible = true;
+            } else {
+              _actionVisible = false;
+            }
+          }),
+
           print(_currentIndex),
         },
         currentIndex: _currentIndex,
