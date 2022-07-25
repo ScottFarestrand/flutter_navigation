@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'dart:async';
-import './register.dart';
+import './register_screen.dart';
 // import './profile.dart';
 import './logged_in_screen.dart';
-// import './register.dart';
+// import './register_screen.dart';
 // import '../widgets/navigation_drawer.dart';
 // import '../widgets/Login.dart';
 // import '../widgets/ValidateEmail.dart';
-// import '../widgets/register.dart';
+// import '../widgets/register_screen.dart';
 
 
 class Login_Screen extends StatefulWidget {
@@ -86,8 +86,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                         print('Wrong password provided for that user.');
                       }
                     }
-
-                    Navigator.pushNamed(context, Logged_In_Screen.id);
+                      Navigator.pushNamed(context, Logged_In_Screen.id);
                   },
                   child: const Text('Login'),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/screens/login_screen.dart';
-import '/screens/register.dart';
+import '/screens/register_screen.dart';
+import '/screens/relationship_screen.dart';
 // import '/screens/profile.dart';
 // import './screens/reminders.dart';
 // import './screens/people.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         Login_Screen.id: (context) => Login_Screen(),
         Logged_In_Screen.id: (context) => Logged_In_Screen(),
         Register_Screen.id: (context) => Register_Screen(),
+        RelationShip_Screen.id: (context) => RelationShip_Screen(),
+
       },
     );
   }

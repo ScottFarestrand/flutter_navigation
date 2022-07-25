@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import '../screens/register.dart';
+// import '../screens/register_screen.dart';
 class validateEmail extends StatefulWidget {
   final Function callback;
   const validateEmail({Key? key, required this.callback()}) : super(key: key);

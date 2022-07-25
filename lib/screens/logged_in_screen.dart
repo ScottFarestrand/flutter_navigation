@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigation/screens/relationship_screen.dart';
 import 'package:flutter_navigation/widgets/people_widget.dart';
 import '../widgets/profile_widget.dart';
 // import '../widgets/profile_widget.dart';
@@ -38,6 +39,7 @@ class _Logged_In_ScreenState extends State<Logged_In_Screen> {
               icon: Icon(Icons.add),
               tooltip: "Add new person",
               onPressed: (){
+                Navigator.pushNamed(context, RelationShip_Screen.id);
 
               },
             ),
