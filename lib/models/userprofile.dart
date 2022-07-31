@@ -1,5 +1,6 @@
 // import 'package:flutter_switch/flutter_switch.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import '../constants.dart';
 class UserProfile {
   String firstName;
   String lastName;
@@ -36,23 +37,23 @@ class UserProfile {
     cellPhoneValidated = cellphonevalidated;
   }
   Map<String, dynamic> toJson() => {
-    'firstname': firstName,
-    'lastname': lastName,
-    'cellphone': cellPhone,
-    'birthdate': birthDate,
-    'sendtextreminders': sendTextReminders,
-    'sendemailreminders': sendEmailReminders,
-    'cellphonevalidated': cellPhoneValidated,
+    cFirstName: firstName,
+    cLastName: lastName,
+    cCellPhone: cellPhone,
+    cBirthDate: birthDate,
+    cSendTextReminders: sendTextReminders,
+    cSendEmailReminders: sendEmailReminders,
+    cCellPhoneValidated: cellPhoneValidated,
   };
 
   static UserProfile fromJson(Map<String, dynamic> json) => UserProfile(
-    firstName: json['firstname'],
-    lastName: json['lastname'],
-    cellPhone: json['cellphone'],
-    birthDate: json['birthdate'],
-    sendTextReminders: json['sendtextreminders'],
-    sendEmailReminders: json['sendEmailReminders'],
-    cellPhoneValidated: json['cellphonevalidated'],
+    firstName: json[cFirstName],
+    lastName: json[cLastName],
+    cellPhone: json[cCellPhone],
+    birthDate: json[cBirthDate],
+    sendTextReminders: json[cSendTextReminders],
+    sendEmailReminders: json[cSendEmailReminders],
+    cellPhoneValidated: json[cCellPhoneValidated],
   );
 
 }
