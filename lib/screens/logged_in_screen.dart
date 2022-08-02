@@ -18,7 +18,7 @@ class Logged_In_Screen extends StatefulWidget {
 
 class _Logged_In_ScreenState extends State<Logged_In_Screen> {
   int _currentIndex = 1;
-  bool _actionVisible = false;
+  bool _actionVisible = true;
   @override
   Widget build(BuildContext context) {
     print("Building");

@@ -9,6 +9,7 @@ class RelationShip_Screen extends StatefulWidget {
 }
 
 class _RelationShip_ScreenState extends State<RelationShip_Screen> {
+  final formGlobalKey = GlobalKey<FormState>();
   final dateFormat = new DateFormat('MMM d, y');
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -16,15 +17,15 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
   final anniversaryDateController = TextEditingController();
   DateTime birthDate = DateTime.now();
   DateTime anniversaryDate = DateTime.now();
-  List<String> types = ['Immediate Family', "Relatives", "Other" ];
-  List<String> immediateFamily = ['Wife', "Husband", "Daughter", "Son", "Cat", "Dog", "Other"];
-  List<String> extendedFamily = ["Grandmother", "Grandfater", "Aunt", "Uncle", "Cousin", "Great Grandmother", "Great Grandfater"];
-  List<String> other = ["Friend", "Employee"];
-  List<String> items = ['Wife', 'Husband', 'Daughter', 'Son,' 'Cat', 'Dog'];
+  List<String> types = ['', 'Immediate Family', "Relatives", "Other" ];
+  List<String> immediateFamily = ['', 'Wife', "Husband", "Daughter", "Son", "Cat", "Dog", "Other"];
+  List<String> extendedFamily = ['', 'Grandmother', "Grandfather", "Aunt", "Uncle", "Cousin", "Great Grandmother", "Great Grandfather"];
+  List<String> other = ['','Friend', 'Employee', 'other'];
+  // List<String> items = ['Wife', 'Husband', 'Daughter', 'Son,' 'Cat', 'Dog'];
   List<int> randomReminders = [0, 1, 2, 3, 4, 5, 6, 7 ];
   int reminderCount = 0;
-  String? selectedItem = 'Wife';
-  String? selectedType = "Immediate Family";
+  String? selectedItem = '';
+  String? selectedType = '';
   List<String> relationshipTypes = [];
   bool celebrateBirthDay = true;
   bool celebrateAnniversary = false;
@@ -36,6 +37,7 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
+          key: formGlobalKey,
           child: Column(children: [
             SizedBox(height: 20),
             buildTextFormField(firstNameController, "First Name"),
@@ -53,7 +55,7 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
             ),
             Visibility(
               visible: celebrateBirthDay,
-                child: buildDateTextFormField(birthDateController, 'Birth Date',birthDate)),
+                child: buildDateTextFormField( birthDateController, 'Birth Date',birthDate)),
             Row(
               children: [
                 Text("Send Anniversary Reminders?", style: TextStyle(fontSize: 18),),
@@ -122,7 +124,6 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                   width: MediaQuery.of(context).size.width * .15,
                   child: DropdownButton<String>(
                     isExpanded: true,
-
                     hint: Text("Number of Random Reminders"),
                     value: reminderCount.toString(),
                     items: randomReminders.map((int value) {
@@ -140,6 +141,31 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                   ),
                 ),
               ],
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  if(formGlobalKey.currentState!.validate())
+                    {
+                      print("Valid");
+                      print(selectedItem);
+                      if (selectedType == '' ){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Select Relationship Type before adding new person"),
+                            ));
+                            }
+                      if (selectedItem == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Select Relationship  before adding new person")),
+                        );
+                      }
+                    }
+                  else
+                    {ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Review Form errors before adding new person")),
+                    );}
+
+                }, child: Text('Add Person')
             ),
 
 
@@ -165,12 +191,20 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
       ),
     );
   }
+  void addPerson(){
 
+  }
   TextFormField buildDateTextFormField(
       TextEditingController textEditingController,
       String labelText,
       DateTime dateTime) {
     return TextFormField(
+          validator: (value){
+            if (value == null || value.isEmpty) {
+              return "Please enter $labelText";
+            }
+            return null;
+            },
           onTap: () {_selectDate(context, textEditingController, dateTime);},
           decoration: InputDecoration(
             labelText: labelText,

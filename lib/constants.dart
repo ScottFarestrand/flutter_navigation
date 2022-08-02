@@ -1,11 +1,13 @@
 const String cFirstName = 'firstname';
 const String cLastName = 'lastname';
 const String cBirthDate = 'birthdate';
+const String cSendBirthdayReminders = 'sendbirthdayreminders';
 const String cCellPhone = 'cellphone';
 const String cCellPhoneValidated = 'cellphonevalidated';
 const String cSendEmailReminders = 'sendemailreminders';
 const String cSendTextReminders = 'sendtextreminders';
 const String cAnniversary = 'anniversary';
+const String cSendAnniversaryReminders = 'sendanniversaryreminders';
 const String cAnniversaryType = 'anniversarytype';
 const String cRandomReminders = 'randomreminders';
 const String cRelationshipType = 'relationshiptype';
