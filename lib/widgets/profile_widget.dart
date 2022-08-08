@@ -262,7 +262,7 @@ class _Profile_WidgetState extends State<Profile_Widget> {
     final json = {
       'FirstName': firstNameController.text,
       'LastName': lastNameController.text,
-      'BirthDate': birthDate,
+      'BirthDate': DateTime.parse(birthDateController.text),
       'SendTextReminders': textReminders,
       'SendEmailReminders': emailReminders,
       'CellPhone': cellPhoneNumberController.text,

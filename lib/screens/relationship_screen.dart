@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/people.dart';
 class RelationShip_Screen extends StatefulWidget {
   const RelationShip_Screen({Key? key}) : super(key: key);
   static const id = "Relationship_Screen";
@@ -15,23 +18,31 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
   final lastNameController = TextEditingController();
   final birthDateController = TextEditingController();
   final anniversaryDateController = TextEditingController();
+
   DateTime birthDate = DateTime.now();
   DateTime anniversaryDate = DateTime.now();
   List<String> types = ['', 'Immediate Family', "Relatives", "Other" ];
   List<String> immediateFamily = ['', 'Wife', "Husband", "Daughter", "Son", "Cat", "Dog", "Other"];
   List<String> extendedFamily = ['', 'Grandmother', "Grandfather", "Aunt", "Uncle", "Cousin", "Great Grandmother", "Great Grandfather"];
   List<String> other = ['','Friend', 'Employee', 'other'];
+  List<String> anniversaryType = ['', 'Marriage', 'Partnership', 'First Date', 'Other'];
   // List<String> items = ['Wife', 'Husband', 'Daughter', 'Son,' 'Cat', 'Dog'];
   List<int> randomReminders = [0, 1, 2, 3, 4, 5, 6, 7 ];
   int reminderCount = 0;
-  String? selectedItem = '';
-  String? selectedType = '';
+  String? selectedRelationshipType ='';
+  String? selectedRelationship ='';
+  String? selectedAnniveraryType = '';
   List<String> relationshipTypes = [];
   bool celebrateBirthDay = true;
   bool celebrateAnniversary = false;
+  DateTime selectedBirthDate = DateTime.now();
+  DateTime selectedAnnversaryDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    firstNameController.text = "LeeAnn";
+    lastNameController.text = "Farestrand";
 
+    print("Relationship SCreen");
     return Scaffold(
       appBar: AppBar(title: Text("Add person"),),
       body: Padding(
@@ -71,13 +82,37 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                 visible: celebrateAnniversary,
                 child: buildDateTextFormField(anniversaryDateController, "Anniversary Date", anniversaryDate)),
             SizedBox(height: 10,),
+            Visibility(
+              visible: celebrateAnniversary,
+              child: Row(
+              children: [
+                Text('Type of Anniversary', style: TextStyle(fontSize: 16),),
+                SizedBox(width: 10,),
+                DropdownButton<String>(
+                  hint: Text("Type of Anniversary"),
+                  value: selectedAnniveraryType,
+                  items: anniversaryType.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value, style: TextStyle(fontSize: 16),),
+                    );
+                  }).toList(),
+                  onChanged: (item) {
+                    print(item);
+                    setState(() {
+                      selectedAnniveraryType = item;
+                    });
+                  },
+                ),
+              ],
+            ),),
             Row(
               children: [
                 Text('Type of Replationship', style: TextStyle(fontSize: 16),),
                 SizedBox(width: 10,),
                 DropdownButton<String>(
                   hint: Text("Relationship Type"),
-                  value: selectedType,
+                  value: selectedRelationshipType,
                   items: types.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -95,7 +130,7 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                 Text('Select Replationship', style: TextStyle(fontSize: 16),),
                 SizedBox(width: 10,),
                 DropdownButton<String>(
-                  value: selectedItem,
+                  value: selectedRelationship,
                   items: relationshipTypes.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -103,9 +138,8 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                     );
                   }).toList(),
                   onChanged: (item) {
-                    print(item);
                     setState(() {
-                      selectedItem = item;
+                      selectedRelationship = item!;
                     });
                   },
                 ),
@@ -134,6 +168,9 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                     }).toList(),
                     onChanged: (count){
                       setState(() {
+
+                        reminderCount = int.parse(count!);
+                        print(reminderCount);
                         print(count);
                       });
 
@@ -144,19 +181,36 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
             ),
             ElevatedButton(
                 onPressed: (){
+                  print("Validating");
                   if(formGlobalKey.currentState!.validate())
                     {
-                      print("Valid");
-                      print(selectedItem);
-                      if (selectedType == '' ){
+                      print("Trying");
+                      final Relationship newrel = Relationship(
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,
+                          birthDate: Timestamp.fromDate(birthDate),
+                          sendBirthdayReminders: celebrateBirthDay,
+                          anniversary: Timestamp.fromDate(anniversaryDate),
+                          sendAnniversaryReminders: celebrateAnniversary,
+                          anniversaryType: selectedAnniveraryType!,
+                          relationshipType: selectedRelationship!,
+                          randomReminders: reminderCount,
+                          parentUserID:  FirebaseAuth.instance.currentUser!.uid);
+                      if ((celebrateAnniversary) && selectedAnniveraryType == '') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                            content: Text("Select Relationship Type before adding new person"),
+                            ),);
+                          };
+                      if (selectedRelationshipType == '' ){
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text("Select Relationship Type before adding new person"),
                             ));
                             }
-                      if (selectedItem == '') {
+                      if (selectedRelationship== '') {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Select Relationship  before adding new person")),
+                          const SnackBar(content: Text("Select Relationship before adding new person")),
                         );
                       }
                     }
@@ -168,24 +222,6 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
                 }, child: Text('Add Person')
             ),
 
-
-
-            // TextFormField(
-            //     controller: firstNameController,
-            //     keyboardType: TextInputType.text,
-            //     decoration: InputDecoration(
-            //       labelText: "First Name",
-            //       labelStyle: TextStyle(fontStyle: FontStyle.italic),
-            //     ),
-            //     style: TextStyle(fontSize: 20),
-            //     validator: (value) {
-            //       if (value == null || value.isEmpty) {
-            //         return "Please enter First Name";
-            //       }
-            //       return null;
-            //     }
-            // ),
-            // buildTextFormField(lastNameController, "Last Name"),
           ],),
           ),
       ),
@@ -197,7 +233,8 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
   TextFormField buildDateTextFormField(
       TextEditingController textEditingController,
       String labelText,
-      DateTime dateTime) {
+      DateTime dateTime,
+      ) {
     return TextFormField(
           validator: (value){
             if (value == null || value.isEmpty) {
@@ -240,6 +277,7 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
       initialDate: dateTime,
       firstDate: DateTime(DateTime.now().year - 125),
       lastDate: DateTime(DateTime.now().year + 1),);
+
     if (pickedDate != null && pickedDate != birthDate)
       setState(() {
         dateTime = pickedDate;
@@ -256,8 +294,7 @@ class _RelationShip_ScreenState extends State<RelationShip_Screen> {
       relationshipTypes = other;
     }
     setState(() {
-      selectedItem = null;
-      selectedType= relationshipType;
+      selectedRelationshipType = relationshipType;
     });
   }
 }
